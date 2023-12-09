@@ -26,6 +26,8 @@ public class GameEnding : MonoBehaviour
         if (other.gameObject == player)
         {
             m_IsPlayerAtExit = true;
+			timerOverall.SetActive(false);
+			slider.SetActive(false);
         }
     }
 
