@@ -7,12 +7,15 @@ public class GameEnding : MonoBehaviour
 {
     public float fadeDuration = 1f;
     public float displayImageDuration = 1f;
+	public GameObject timerOverall;
+	public GameObject slider;
     public GameObject player;
     public CanvasGroup exitBackgroundImageCanvasGroup;
     public AudioSource exitAudio;
     public CanvasGroup caughtBackgroundImageCanvasGroup;
     public AudioSource caughtAudio;
 
+	public int Duration;
     bool m_IsPlayerAtExit;
     bool m_IsPlayerCaught;
     float m_Timer;
@@ -29,7 +32,30 @@ public class GameEnding : MonoBehaviour
     public void CaughtPlayer ()
     {
         m_IsPlayerCaught = true;
+		timerOverall.SetActive(false);
+		slider.SetActive(false);
     }
+	
+	void Start()
+	{
+		StartCoroutine(UpdateTimer());
+		timerOverall.SetActive(true);
+		slider.SetActive(true);
+	}
+	
+	private IEnumerator UpdateTimer()
+	{
+		while(Duration >= 0)
+		{
+			Duration -= 1;
+			yield return new WaitForSeconds(1f);
+		}
+		if(m_IsPlayerAtExit == false)
+		{
+			CaughtPlayer();
+			EndLevel (caughtBackgroundImageCanvasGroup, true, caughtAudio);
+		}
+	}
 
     void Update ()
     {
