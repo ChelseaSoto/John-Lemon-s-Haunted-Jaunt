@@ -56,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
 		
 		if(Input.GetKey(KeyCode.LeftShift) && sprintAmount >= 0.1f && tired == false)
 		{
-			speedVar = 1.5f;
+			speedVar = 1.8f;
 			sprintAmount -= .7f;
 			sprint.value = sprintAmount;
 		}
